@@ -1,0 +1,19 @@
+{
+    "name": "Conjugator ",
+    "files": [
+        ".vscode/settings.json",
+        ".vscode/tasks.json",
+        "README.md",
+        "main.blocks",
+        "main.ts",
+        "test.ts",
+        "tsconfig.json"
+    ],
+    "dependencies": {
+        "device": "*"
+    },
+    "preferredEditor": "blocksprj",
+    "testFiles": [
+        "test.ts"
+    ]
+}
