@@ -197,6 +197,10 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.tile4, function (sprite, location
     mySprite.startEffect(effects.smiles, 1000)
     music.baDing.play()
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.builtin.crowd1, function (sprite, location) {
+    mySprite.say("Café-Japón, café-Japón, cafe-Japón", 5000)
+    music.siren.play()
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.rock1, function (sprite, location) {
     mySprite.say("Sobrevivir, pero supervivencia", 5000)
 })
