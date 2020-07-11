@@ -173,7 +173,6 @@ e e e e e e e e e e e e e e e e
 }
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile1, function (sprite, location) {
     mySprite.say("Manda uebos. Sí, está bien escrito.", 5000)
-    music.siren.play()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.purpleSwitchDown, function (sprite, location) {
     mySprite.say("El chute que necesitaba", 5000)
@@ -190,16 +189,19 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.tile5, function (sprite, location
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile6, function (sprite, location) {
     mySprite.say("¡Ole! Ya tienes la segunda terminación", 5000)
     mySprite.startEffect(effects.smiles, 1000)
+    tiles.setTileAt(location, sprites.castle.rock2)
+    info.changeScoreBy(1)
     music.baDing.play()
 })
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile4, function (sprite, location) {
     mySprite.say("¡Tirado!", 5000)
     mySprite.startEffect(effects.smiles, 1000)
+    tiles.setTileAt(location, sprites.castle.rock2)
+    info.changeScoreBy(1)
     music.baDing.play()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.crowd1, function (sprite, location) {
     mySprite.say("Café-Japón, café-Japón, cafe-Japón", 5000)
-    music.siren.play()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.rock1, function (sprite, location) {
     mySprite.say("Sobrevivir, pero supervivencia", 5000)
@@ -216,6 +218,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.saplingPine, function (spr
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile7, function (sprite, location) {
     mySprite.say("Ya era hora. Ve echando leches hacia la puerta.", 5000)
     mySprite.startEffect(effects.smiles, 1000)
+    tiles.setTileAt(location, sprites.castle.rock2)
+    info.changeScoreBy(1)
     music.baDing.play()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
@@ -272,4 +276,5 @@ tiles.placeOnRandomTile(mySprite, sprites.dungeon.stairLarge)
 scene.cameraFollowSprite(mySprite)
 info.startCountdown(180)
 info.setLife(3)
+info.setScore(0)
 music.playMelody("C5 G B A F A C5 B ", 66)
