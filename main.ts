@@ -201,7 +201,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.rock1, function (sprite, l
     conjugator.say("Sobrevivir, pero supervivencia", 5000)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.fire, 1000)
+    otherSprite.destroy()
+    sprite.destroy(effects.fire, 500)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
@@ -221,10 +222,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, conjugator, Math.randomRange(10, 0), -200)
+`, conjugator, 200, 0)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprite.destroy()
     otherSprite.destroy(effects.fire, 500)
 })
 scene.onOverlapTile(SpriteKind.Enemy, myTiles.tile5, function (sprite, location) {
@@ -244,7 +244,7 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.tile7, function (sprite, location
     music.baDing.play()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
-    conjugator.say("La palanca. Es vida extra", 5000)
+    conjugator.say("Busca la palanca", 5000)
     tiles.setTileAt(location, sprites.castle.rock2)
 })
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile2, function (sprite, location) {
@@ -260,7 +260,7 @@ scene.onOverlapTile(SpriteKind.Enemy, myTiles.tile8, function (sprite, location)
     info.changeLifeBy(-1)
     music.wawawawaa.play()
 })
-let baul: Sprite = null
+let tiburón: Sprite = null
 let projectile: Sprite = null
 let conjugator: Sprite = null
 conjugator = sprites.create(img`
@@ -307,24 +307,26 @@ scene.cameraFollowSprite(conjugator)
 info.startCountdown(180)
 info.setLife(3)
 info.setScore(0)
-music.playMelody("C5 G B A F A C5 B ", 66)
-game.onUpdate(function () {
-    baul = sprites.create(img`
-. . b b b b b b b b b b b b . . 
-. b e 4 4 4 4 4 4 4 4 4 4 e b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-b e e e e e e e e e e e e e e b 
-b e e e e e e e e e e e e e e b 
-b b b b b b b d d b b b b b b b 
-c b b b b b b c c b b b b b b c 
-c c c c c c b c c b c c c c c c 
-b e e e e e c b b c e e e e e b 
-b e e e e e e e e e e e e e e b 
-b c e e e e e e e e e e e e c b 
-b b b b b b b b b b b b b b b b 
-. b b . . . . . . . . . . b b . 
+game.onUpdateInterval(1000, function () {
+    tiburón = sprites.create(img`
+. . . . . . . . . . . f f f f f f f . . . c c f f f . . . . . . . . . . 
+. . . . . . . . . . f b b b b b b b f f c b b b b f . . . . . . . . . . 
+. . . . . . . . . . f b b 1 1 1 b b b b b f f b f . . . . . . . . . . . 
+. . . . . . . . . . f b 1 1 1 1 1 f f b b b b f f . . . . . . . . . . . 
+. . . . . . . . . . f 1 c c c c 1 f f b b b b b c f f . . . . . . . . . 
+. . . . . . . . . . f f c 1 c 1 c 1 b b c b c b c c c f . . . . . . . . 
+. . . . . . . . . . . f c c 3 3 3 1 b b b c b c b c c c f . . c c c c c 
+. . . . . . . . . . . . c 3 3 3 c 1 b b b c b c b c c c c f c d d b b c 
+. . . . . . . . . . . . c 3 3 3 c 1 b b b b b b b c c c c c d d b c c . 
+. . . . . . . . . . . . c 3 3 3 c 1 1 b b b b b c c c c c c b b c c . . 
+. . . . . . . . . . . c c 3 3 1 c 1 1 b b b b c c c c c c f b c c f . . 
+. . . . . . . . . . . c c 1 3 c 1 1 c b b b c c c c c b b c f c c f . . 
+. . . . . . . . . . . c 1 1 1 1 1 1 c b b b f d d d d d c . f b b c f . 
+. . . . . . . . . . . . c c 1 1 1 1 f b d b b f d d d c . . . f b b f . 
+. . . . . . . . . . . . . . c c c f f f b d b b f c c . . . . . f b b f 
+. . . . . . . . . . . . . . . . . . . . f f f f f . . . . . . . . f f f 
 `, SpriteKind.Enemy)
+    tiburón.setVelocity(-100, 0)
+    tiburón.setPosition(180, Math.randomRange(0, 120))
+    tiburón.setFlag(SpriteFlag.DestroyOnWall, true)
 })
