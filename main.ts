@@ -226,6 +226,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy(effects.fire, 500)
+    info.changeLifeBy(-1)
+    music.pewPew.play()
 })
 scene.onOverlapTile(SpriteKind.Enemy, myTiles.tile5, function (sprite, location) {
     conjugator.say("va a ser que no", 5000)
@@ -305,7 +307,7 @@ tiles.setTilemap(tiles.createTilemap(
 tiles.placeOnRandomTile(conjugator, sprites.dungeon.stairLarge)
 scene.cameraFollowSprite(conjugator)
 info.startCountdown(180)
-info.setLife(3)
+info.setLife(5)
 info.setScore(0)
 game.onUpdateInterval(1000, function () {
     tiburón = sprites.create(img`
@@ -327,6 +329,6 @@ game.onUpdateInterval(1000, function () {
 . . . . . . . . . . . . . . . . . . . . f f f f f . . . . . . . . f f f 
 `, SpriteKind.Enemy)
     tiburón.setVelocity(-100, 0)
-    tiburón.setPosition(180, Math.randomRange(0, 120))
+    tiburón.setPosition(Math.randomRange(0, 120), 180)
     tiburón.setFlag(SpriteFlag.DestroyOnWall, true)
 })
