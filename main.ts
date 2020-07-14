@@ -265,6 +265,7 @@ scene.onOverlapTile(SpriteKind.Enemy, myTiles.tile8, function (sprite, location)
 let tiburón: Sprite = null
 let projectile: Sprite = null
 let conjugator: Sprite = null
+let escaleras = [sprites.dungeon.stairLarge, sprites.dungeon.stairLarge, sprites.dungeon.stairLarge, sprites.dungeon.stairLarge]
 conjugator = sprites.create(img`
 . . . . . . . . . . . . 
 . . f f f f f f f f . . 
@@ -309,6 +310,12 @@ scene.cameraFollowSprite(conjugator)
 info.startCountdown(180)
 info.setLife(5)
 info.setScore(0)
+game.onUpdateInterval(1000, function () {
+    projectile = sprites.createProjectileFromSide(escaleras[Math.randomRange(0, escaleras.length - 1)], 0, 75)
+    projectile.setKind(SpriteKind.Enemy)
+    projectile.x = Math.randomRange(10, 150)
+    music.magicWand.playUntilDone()
+})
 game.onUpdateInterval(1000, function () {
     tiburón = sprites.create(img`
 . . . . . . . . . . . f f f f f f f . . . c c f f f . . . . . . . . . . 
