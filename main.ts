@@ -174,6 +174,37 @@ e e e e e e e e e e e e e e e e
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile1, function (sprite, location) {
     conjugator.say("Manda uebos. Sí, está bien escrito.", 5000)
 })
+function start_level () {
+    tiles.setTilemap(tiles.createTilemap(
+            hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009090909090909090909090909090909000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`,
+            img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`,
+            [myTiles.tile0,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.castle.tileGrass1],
+            TileScale.Sixteen
+        ))
+    conjugator.setPosition(20, 140)
+    count = 0
+    for (let index = 0; index <= 10 + nivel; index++) {
+        arrive = sprites.create(myTiles.tile2, SpriteKind.Player)
+    }
+    conjugator.say("level" + nivel)
+}
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.greenSwitchUp, function (sprite, location) {
     conjugator.say("Odiador mejor que hater", 5000)
     conjugator.startEffect(effects.rings, 1000)
@@ -250,7 +281,16 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sp
     tiles.setTileAt(location, sprites.castle.rock2)
 })
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile2, function (sprite, location) {
-    game.over(true, effects.hearts)
+    nivel += 1
+    conjugator.say("level" + conjugator)
+    music.siren.play()
+    start_level()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    count += 1
+    music.siren.play()
+    otherSprite.destroy()
+    otherSprite.startEffect(effects.spray)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.crowd4, function (sprite, location) {
     conjugator.say("¡Cuidado!", 5000)
@@ -264,9 +304,12 @@ scene.onOverlapTile(SpriteKind.Enemy, myTiles.tile8, function (sprite, location)
 })
 let tiburón: Sprite = null
 let projectile: Sprite = null
+let arrive: Sprite = null
+let count = 0
 let conjugator: Sprite = null
+let nivel = 0
 game.splash("Recoge las 3 terminaciones", "y busca la salida")
-let nivel = 1
+nivel = 1
 conjugator = sprites.create(img`
 . . . . . . . . . . . . 
 . . f f f f f f f f . . 
@@ -311,9 +354,6 @@ scene.cameraFollowSprite(conjugator)
 info.startCountdown(180)
 info.setLife(5)
 info.setScore(0)
-game.onUpdate(function () {
-	
-})
 game.onUpdateInterval(1000, function () {
     tiburón = sprites.create(img`
 . . . . . . . . . . . f f f f f f f . . . c c f f f . . . . . . . . . . 
