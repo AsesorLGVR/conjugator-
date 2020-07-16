@@ -171,22 +171,19 @@ e e e e b b b b b b e e b b e e
 e e e e e e e e e e e e e e e e 
 `
 }
-scene.onOverlapTile(SpriteKind.Player, myTiles.tile1, function (sprite, location) {
-    conjugator.say("Manda uebos. Sí, está bien escrito.", 5000)
-})
 function start_level () {
     tiles.setTilemap(tiles.createTilemap(
-            hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009090909090909090909090909090909000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`,
+            hex`100010000000000000000000000000000000000000000b0b0b0b0b00000000000000000b000b0b0b0b0b0b0b0b0b000000000b0b0b0b0b0b0b0b0b0b0b0b0b00000b0b0b0000000000000000000000000000000000000000000000000000000b0b0b0b0b000000000000000000000b0b0000000000000000000000000b0b0b000000000000000000000000000b00000000000000090909090909090909090909090909090c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c`,
             img`
 . . . . . . . . . . . . . . . . 
+. . 2 2 2 2 2 . . . . . . . . 2 
+. 2 2 2 2 2 2 2 2 2 . . . . 2 2 
+2 2 2 2 2 2 2 2 2 2 2 . . 2 2 2 
 . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . 2 2 2 2 2 
+. . . . . . . . . . 2 2 . . . . 
+. . . . . . . . 2 2 2 . . . . . 
+. . . . . . . . 2 . . . . . . . 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -195,16 +192,19 @@ function start_level () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `,
-            [myTiles.tile0,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.castle.tileGrass1],
+            [myTiles.tile0,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.castle.tileGrass1,sprites.builtin.oceanSand8,sprites.builtin.forestTiles0,sprites.dungeon.hazardWater],
             TileScale.Sixteen
         ))
     conjugator.setPosition(20, 140)
     count = 0
+    conjugator.say("level" + nivel)
     for (let index = 0; index <= 10 + nivel; index++) {
         arrive = sprites.create(myTiles.tile2, SpriteKind.Player)
     }
-    conjugator.say("level" + nivel)
 }
+scene.onOverlapTile(SpriteKind.Player, myTiles.tile1, function (sprite, location) {
+    conjugator.say("Manda uebos. Sí, está bien escrito.", 5000)
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.greenSwitchUp, function (sprite, location) {
     conjugator.say("Odiador mejor que hater", 5000)
     conjugator.startEffect(effects.rings, 1000)
@@ -308,7 +308,7 @@ let arrive: Sprite = null
 let count = 0
 let conjugator: Sprite = null
 let nivel = 0
-game.splash("Recoge las 3 terminaciones", "y busca la salida")
+game.splash("Recoge las 3 terminaciones", "y busca la salida.")
 nivel = 1
 conjugator = sprites.create(img`
 . . . . . . . . . . . . 
