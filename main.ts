@@ -173,15 +173,15 @@ e e e e e e e e e e e e e e e e
 }
 function start_level () {
     tiles.setTilemap(tiles.createTilemap(
-            hex`100010000000000000000000000000000000000000000b0b0b0b0b00000000000000000b000b0b0b0b0b0b0b0b0b000000000b0b0b0b0b0b0b0b0b0b0b0b0b00000b0b0b0000000000000000000000000000000000000000000000000000000b0b0b0b0b000000000000000000000b0b0000000000000000000000000b0b0b000000000000000000000000000b00000000000000090909090909090909090909090909090c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c`,
+            hex`10001000000000000000000000000000000000000000000000000000000000000000000b00000000000000000000000000000b0b000000000000000000000000000b0b0b0b0b0b0b0b0b0b0b00000000000000000b0b0b0b0b0b0b0b0000000b0b0b0b0b0b0b0b0b0b0b0b0000000b0b0000000000000000000000000b0b0b000000000000000000000000000b00000000000000090909090909090909090909090909090c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c`,
             img`
 . . . . . . . . . . . . . . . . 
-. . 2 2 2 2 2 . . . . . . . . 2 
-. 2 2 2 2 2 2 2 2 2 . . . . 2 2 
-2 2 2 2 2 2 2 2 2 2 2 . . 2 2 2 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . 2 2 2 2 2 
-. . . . . . . . . . 2 2 . . . . 
+. . . . . . . . . . . . . . . 2 
+. . . . . . . . . . . . . . 2 2 
+. . . . . . . . . . . . . 2 2 2 
+2 2 2 2 2 2 2 2 . . . . . . . . 
+2 2 2 2 2 2 2 2 . . . 2 2 2 2 2 
+2 2 2 2 2 2 2 . . . 2 2 . . . . 
 . . . . . . . . 2 2 2 . . . . . 
 . . . . . . . . 2 . . . . . . . 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
@@ -197,10 +197,11 @@ function start_level () {
         ))
     conjugator.setPosition(20, 140)
     count = 0
-    conjugator.say("level" + nivel)
     for (let index = 0; index <= 10 + nivel; index++) {
         arrive = sprites.create(myTiles.tile2, SpriteKind.Player)
     }
+    conjugator.say("level" + nivel, 1000)
+    info.startCountdown(180)
 }
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile1, function (sprite, location) {
     conjugator.say("Manda uebos. Sí, está bien escrito.", 5000)
