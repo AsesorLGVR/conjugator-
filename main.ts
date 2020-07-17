@@ -288,10 +288,14 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.tile2, function (sprite, location
     start_level()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
-    count += 1
+    nivel += 1
     music.siren.play()
-    otherSprite.destroy()
-    otherSprite.startEffect(effects.spray)
+    if (conjugator) {
+        otherSprite.destroy()
+        otherSprite.startEffect(effects.spray)
+    } else {
+        game.over(true)
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.crowd4, function (sprite, location) {
     conjugator.say("¡Cuidado!", 5000)
