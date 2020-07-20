@@ -198,7 +198,7 @@ function start_level () {
     conjugator.setPosition(20, 140)
     count = 0
     for (let index = 0; index <= 10 + nivel; index++) {
-        arrive = sprites.create(myTiles.tile2, SpriteKind.Player)
+        arrive = sprites.create(myTiles.tile2, SpriteKind.Food)
     }
     conjugator.say("level" + nivel, 1000)
     info.startCountdown(180)
@@ -286,16 +286,7 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.tile2, function (sprite, location
     conjugator.say("level" + conjugator)
     music.siren.play()
     start_level()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
-    nivel += 1
-    music.siren.play()
-    if (conjugator) {
-        otherSprite.destroy()
-        otherSprite.startEffect(effects.spray)
-    } else {
-        game.over(true)
-    }
+    game.splash("has pasado al nivel 2")
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.crowd4, function (sprite, location) {
     conjugator.say("¡Cuidado!", 5000)
